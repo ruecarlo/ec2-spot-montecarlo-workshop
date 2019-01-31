@@ -32,7 +32,7 @@ If you'd like to learn more: [Basics of Algorithmic Trading: Concepts and Exampl
 
 <a name="Labs"></a>
 ### Lab Overview:  
-These labs are designed to be completed in sequence.  If you are reading this at a live AWS event, the workshop attendants will give you a high level run down of the labs.  Then it's up to you to follow the instructions below to complete the labs.  Don't worry if you're embarking on this journey in the comfort of your office or home - presentation materials can be found in the git repo in the top-level [presentation](https://github.com/aws-samples/ec2-spot-montecarlo-workshop/tree/master/presentation) folder.
+These labs are designed to be completed in sequence.  If you are reading this at a live AWS event, the workshop attendants will give you a high level run down of the labs.  Then it's up to you to follow the instructions below to complete the labs.  Don't worry if you're embarking on this journey in the comfort of your office or home - presentation materials can be found in the git repo in the top-level [presentation](./presentation) folder.
 
 **Lab 1:** Setup the workshop environment on AWS  
 **Lab 2:** Explore the Algorithmic Trading Concepts with Jupyter  
@@ -86,7 +86,7 @@ At the top right hand corner of the AWS Console, you'll see a **Support** dropdo
 #### Launch the Workshop template
 For your convenience, we provide a CloudFormation template to stand up the core infrastructure.  
 
-The template sets up a VPC, IAM roles, S3 bucket, and an EC2 Instance. The EC2 instance will run a Jupyter Notebook which we will leverage in Lab 2 and a small website that we will use in Lab 3. The idea is to provide a contained environment, so as not to interfere with any other provisioned resources in your account.  In order to demonstrate cost optimization strategies, the EC2 Instance is an [EC2 Spot Instance](https://aws.amazon.com/ec2/spot/) deployed by [Spot Fleet](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet.html).  If you are new to [CloudFormation](https://aws.amazon.com/cloudformation/), take the opportunity to review the [template](https://github.com/awslabs/spot-motecarlo-workshop/blob/master/lab-1-setup/cfn-templates/spot-montecarlo-workshop.yaml) during stack creation.
+The template sets up a VPC, IAM roles, S3 bucket, and an EC2 Instance. The EC2 instance will run a Jupyter Notebook which we will leverage in Lab 2 and a small website that we will use in Lab 3. The idea is to provide a contained environment, so as not to interfere with any other provisioned resources in your account.  In order to demonstrate cost optimization strategies, the EC2 Instance is an [EC2 Spot Instance](https://aws.amazon.com/ec2/spot/) deployed by [Spot Fleet](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet.html).  If you are new to [CloudFormation](https://aws.amazon.com/cloudformation/), take the opportunity to review the [template](./lab-1-setup/cfn-templates/spot-montecarlo-workshop.yaml) during stack creation.
 
 
 >**Important:** Prior to launching a stack, be aware that a few of the resources launched need to be manually deleted when the workshop is over. When finished working, please review the "Workshop Cleanup" section to learn what manual teardown is required by you.
@@ -245,7 +245,7 @@ The CloudFormation template deployed a web server that will serve as the user in
 
 8. For **Key pair name**, choose the SSH Key Pair that you specified in the CloudFormation template. 
 9. Under **Security groups** and  **IAM instance profile**, select the name with the prefix *spot-montecarlo workshop*.
-10. We will use User Data to bootstrap our work nodes. Copy and paste the [spotlabworker.sh](https://github.com/aws-samples/ec2-spot-montecarlo-workshop/blob/master/templates/spotlabworker.sh) code from the repo We recommend using grabbing the latest code from the repo, but you can review the script below.
+10. We will use User Data to bootstrap our work nodes. Copy and paste the [spotlabworker.sh](./templates/spotlabworker.sh) code from the repo We recommend using grabbing the latest code from the repo, but you can review the script below.
 
 	<pre>
 	#!/bin/bash
