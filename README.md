@@ -149,7 +149,7 @@ The [Jupyter Notebook](http://jupyter.org/) allows you to create and share docum
 
 1. Log into the Jupyter Notebook using the **Jupyter** URL output from the CloudFormation Template using the password you configured when building the stack. 
 
-2. Click on the notebook named *monte-carlo-workshop.ipynb* and it should open in a new tab.
+2. Click on the notebook named [*monte-carlo-workshop.ipynb*](src/monte-carlo-workshop.ipynb) and it should open in a new tab.
 3. Follow the instructions in the Notebook to complete Lab 2. If you're new to Jupyter, you press shift-enter to run code and/or proceed to the next section. When you're done with the Notebook, return here and we'll take the concepts we learned in this lab and build our own automated pipeline.
 
 **You've completed Lab 2, Congrats!**
@@ -248,31 +248,31 @@ The CloudFormation template deployed a web server that will serve as the user in
 9. Under **Security groups** and  **IAM instance profile**, select the name with the prefix *spot-montecarlo workshop*.
 10. We will use User Data to bootstrap our work nodes. Copy and paste the [spotlabworker.sh](./templates/spotlabworker.sh) code from the repo We recommend using grabbing the latest code from the repo, but you can review the script below.
 
-	<pre>
-	#!/bin/bash
-	# Install Dependencies
-	yum -y install git python-numpy python-matplotlib python-scipy
-	pip install pandas-datareader fix_yahoo_finance
-	pip install scipy 
-	pip install boto3
-	
-	#Populate Variables
-    echo 'Populating Variables'
-	REGION=`curl http://169.254.169.254/latest/dynamic/instance-identity/document|grep region|awk -F\" '{print $4}'`
-	mkdir /home/ec2-user/spotlabworker
-	chown ec2-user:ec2-user /home/ec2-user/spotlabworker
-	cd /home/ec2-user/spotlabworker
-	WEBURL=$(aws cloudformation --region $REGION describe-stacks --query 'Stacks[0].Outputs[?OutputKey==`WebInterface`].OutputValue' --output text)
-	echo 'Region is '$REGION
-    echo 'URL is '$WEBURL
+```bash
+#!/bin/bash
+# Install Dependencies
+yum -y install git python-numpy python-matplotlib python-scipy python-pip
+pip install pandas-datareader fix_yahoo_finance scipy boto3
 
-    echo "Downloading worker code"
-	wget $WEBURL/static/queue_processor.py
-	wget $WEBURL/static/worker.py
-	
-	echo 'Starting the worker processor'
-	python /home/ec2-user/spotlabworker/queue_processor.py --region $REGION> stdout.txt 2>&1
-	</pre>  
+#Populate Variables
+echo 'Populating Variables'
+REGION=`curl http://169.254.169.254/latest/dynamic/instance-identity/document|grep region|awk -F\" '{print $4}'`
+mkdir /home/ec2-user/spotlabworker
+chown ec2-user:ec2-user /home/ec2-user/spotlabworker
+cd /home/ec2-user/spotlabworker
+WEBURL=$(aws cloudformation --region $REGION describe-stacks --query 'Stacks[0].Outputs[?OutputKey==`WebInterface`].OutputValue' --output text)
+echo 'Region is '$REGION
+echo 'URL is '$WEBURL
+
+echo "Downloading worker code"
+wget $WEBURL/static/queue_processor.py
+wget $WEBURL/static/worker.py
+
+echo 'Starting the worker processor'
+python /home/ec2-user/spotlabworker/queue_processor.py --region $REGION> stdout.txt 2>&1
+```
+
+
 11. Under **Instance tags**, click on **Add new tag**. Enter **Name** for *Key*. Enter **WorkerNode** for *Value*.
 
 	![Spot Request](images/spot_config_2.png)
