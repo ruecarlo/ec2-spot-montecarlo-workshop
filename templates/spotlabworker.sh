@@ -1,7 +1,7 @@
 #!/bin/bash
 # Install Dependencies
 yum -y install git python-numpy python-matplotlib python-scipy python-pip
-pip install pandas-datareader fix_yahoo_finance scipy boto3 awscli
+pip install --upgrade pandas-datareader fix_yahoo_finance scipy boto3 awscli
 
 #Populate Variables
 echo 'Populating Variables'
