@@ -362,9 +362,9 @@ In the next lab, we will use [AWS Batch](https://aws.amazon.com/batch/) to creat
 4. Go to **Job Definition** , hit **Create** and enter the following details
     * **Job definition name** :  montecarlo-queue-processor
     * **Job role** :  Select the one that appears in drop down, as created during setup
-    * **Container image** :  anshrma/montecarlo-workshop-worker:latest
+    * **Container image** :  ruecarlo/montecarlo-workshop-worker:latest
     
-    > We have created a docker container image containing the required libraries and the Worker code that we used in the previous lab. This container image is stored on [Dockerhub](https://hub.docker.com/r/anshrma/montecarlo-workshop-worker/). This is the image that we are pulling for our batch job.
+    > We have created a docker container image containing the required libraries and the Worker code that we used in the previous lab. This container image is stored on [Dockerhub](https://hub.docker.com/r/ruecarlo/montecarlo-workshop-worker/). This is the image that we are pulling for our batch job.
     
     * **Environment variables (Key)**  : REGION
     * **Environment variables (Value)**  : Name the region you are using, example us-east-1
@@ -414,7 +414,7 @@ Hopefully you've enjoyed the workshop and learned a few new things. Now follow t
 5. In the CloudFormation template, select the workshop stack and select **Actions** and then **Delete stack**.
 
 <a name="appendix"></a>
-##Appendix
+## Appendix
 
 ### Estimated Costs
 The estimated cost for running this 2.5 hour workshop will be less than $5.
